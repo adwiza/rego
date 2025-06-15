@@ -29,6 +29,10 @@ test_disallow_review_non_customer if {
 }
 
 test_allow_delete if {
-	allow_delete with role.is_moderator as true
+	allow_delete with role.is_moderator as true with input as {"role": "foo"}
+	# with http.send as http_send_mock # or you can just provide the return value e.g. mock_response_obj
 }
 
+# http_send_mock(request) := mock_response_obj {
+# 	true # optional logic
+# }

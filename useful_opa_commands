@@ -1,0 +1,3 @@
+opa fmt rules.rego --write
+opa test . --coverage
+opa test . -v
