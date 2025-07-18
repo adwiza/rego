@@ -67,3 +67,25 @@ is_admin {
         details := admins2[name] # admins2 has a value for key `name`
         lower(name) == lower(input.user)
 }
+
+# Recommendation: use set lookup to handle group membership.
+# Pre-process if necessary. O(1) time.
+
+is_admin {
+    admins[lower(input.user)]
+}
+
+# Whitespace is technically irrelevant but visually helpful
+# means the same as if the equality check were indented
+is_admin {
+    some i 
+    input.user == admins[i]
+}
+
+# SOME doesn't introduce a new scope. Declares variable local the rule.
+is_admin {
+    some i
+    input.user == admins[i]
+    some i                          # COMPILE ERROR
+    input.user == admins2[i].user
+}
